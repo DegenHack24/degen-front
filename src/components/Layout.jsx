@@ -8,7 +8,7 @@ export default function Layout() {
   console.log("metaMaskAccount", metaMaskAccount);
   console.log("error", error);
   return (
-    <div className="w-full">
+    <div className="w-full justify-center mx-auto">
       <button
         disabled={buttonText === "Connected"}
         onClick={connectWalletHandler}
