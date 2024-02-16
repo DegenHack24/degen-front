@@ -1,4 +1,4 @@
-import "./App.css";
+import "../src/styles/App.css";
 import Layout from "./components/Layout";
 import { MetamaskProvider } from "./utils/contexts/metamaskContext";
 
