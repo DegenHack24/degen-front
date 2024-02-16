@@ -3,10 +3,9 @@ import AssetsTable from "./AssetsTable";
 import Dashboard from "./Dashboard";
 
 export default function Layout() {
-  const { buttonText, connectWalletHandler, metaMaskAccount, error } =
+  const { buttonText, connectWalletHandler, metaMaskAccount } =
     useMetaMaskContext();
-  console.log("metaMaskAccount", metaMaskAccount);
-  console.log("error", error);
+
   return (
     <div className="w-full justify-center mx-auto">
       <div className="flex flex-row gap-10">
@@ -18,8 +17,9 @@ export default function Layout() {
           <div className="w-20">{buttonText}</div>
         </button>
       </div>
-      <Dashboard />
-      <AssetsTable />
+      <div className="flex justify-center">
+        {metaMaskAccount ? <AssetsTable /> : <Dashboard />}
+      </div>
     </div>
   );
 }

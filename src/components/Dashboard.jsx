@@ -205,11 +205,11 @@ export default function Dashboard() {
   };
   return (
     <div className="w-[600px] mx-auto mb-20 mt-10 p-10 border rounded-xl">
-      <div className="flex flex-row gap-10">
-        <div>Name</div>
-        <div>Price</div>
-        <div>Quantity</div>
-        <div className="">Total</div>
+      <div className="flex flex-row gap-10 text-black">
+        <h3>Name</h3>
+        <h3>Price</h3>
+        <h3>Quantity</h3>
+        <h3>Total</h3>
       </div>
       <nav className="h-[700px] overflow-y-auto" aria-label="Directory">
         {Object.keys(directory).map((letter) => (
