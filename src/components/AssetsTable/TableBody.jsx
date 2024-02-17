@@ -16,7 +16,7 @@ export default function TableBody({ data, view }) {
                   <th
                     key={index}
                     scope="col"
-                    className="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8"
+                    className="sticky top-0 z-10 border-b border-slate-200 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-slate-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8 text-black"
                   >
                     {heading}
                   </th>
@@ -29,9 +29,9 @@ export default function TableBody({ data, view }) {
                   <td
                     className={classNames(
                       index !== element.length - 1
-                        ? "border-b border-gray-200"
+                        ? "border-b border-slate-200"
                         : "",
-                      "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8"
+                      "whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6 lg:pl-8"
                     )}
                   >
                     {element.name}
@@ -39,9 +39,9 @@ export default function TableBody({ data, view }) {
                   <td
                     className={classNames(
                       index !== element.length - 1
-                        ? "border-b border-gray-200"
+                        ? "border-b border-slate-200"
                         : "",
-                      "whitespace-nowrap hidden px-3 py-4 text-sm text-gray-500 sm:table-cell"
+                      "whitespace-nowrap hidden px-3 py-4 text-sm text-slate-500 sm:table-cell text-black"
                     )}
                   >
                     {element.amount}
@@ -50,9 +50,9 @@ export default function TableBody({ data, view }) {
                   <td
                     className={classNames(
                       index !== element.length - 1
-                        ? "border-b border-gray-200"
+                        ? "border-b border-slate-200"
                         : "",
-                      "relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8"
+                      "relative whitespace-nowrap py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-8 lg:pr-8 text-black"
                     )}
                   >
                     <a
