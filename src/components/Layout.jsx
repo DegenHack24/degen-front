@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useMetaMaskContext } from "../utils/contexts/metamaskContext";
-import AssetsTable from "./AssetsTable";
+import TableWrapper from "./AssetsTable/TableWrapper";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 
@@ -26,7 +26,7 @@ export default function Layout() {
       <main className="w-full items-center flex-1">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/assets-table" element={<AssetsTable />} />
+          <Route path="/assets-table" element={<TableWrapper />} />
         </Routes>
       </main>
     </div>

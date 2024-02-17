@@ -1,41 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    @apply font-base;
-  }
-
-  h1,
-  .heading-1 {
-    @apply text-3xl font-bold leading-6;
-  }
-
-  h2,
-  .heading-2 {
-    @apply text-2xl font-semibold leading-6;
-  }
-
-  h3,
-  .heading-3 {
-    @apply text-sm font-medium leading-6;
-  }
-
-  p,
-  .paragraph {
-    @apply text-sm font-normal;
-  }
-}
-
 /* Disable input arrows for Chrome, Safari, etc. */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-/* Disable input arrows for Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
 }
