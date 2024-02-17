@@ -1,27 +1,40 @@
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-import { useState } from "react";
 import { useMetaMaskContext } from "../utils/contexts/metamaskContext";
 import { dashboardMocks } from "../utils/constants/dashboard-mocks";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Modal from "./Modal";
 
 export default function Dashboard() {
+  const [directory, setDirectory] = useState({});
   const [open, setOpen] = useState(false);
   const { metaMaskAccount } = useMetaMaskContext();
-  // const [directory, setDirectory] = useState({});
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("YOUR_API_ENDPOINT");
-  //       setDirectory(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/v1/getAllOffers",
+          {
+            page_envelope: {
+              page: 1,
+              items_on_page: 20,
+            },
+          },
+          {
+            headers: {
+              "Content-Type": "application/json;charset=utf-8",
+              "X-Auth-Token": "xd",
+            },
+          }
+        );
+        setDirectory(response.data.body);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -39,29 +52,38 @@ export default function Dashboard() {
           <h3>Price</h3>
           <h3>Quantity</h3>
           <h3>Total</h3>
+          <h3>Date</h3>
         </div>
         <nav className="h-[600px] overflow-y-auto" aria-label="Directory">
           {Object.keys(dashboardMocks).map((letter) => (
             <div key={letter} className="relative">
+              {console.log(letter, "letter")}
               <div className="sticky top-0 z-10 border-y border-b-slate-200 border-t-slate-100 bg-slate-50 px-3 py-1.5 text-sm font-semibold leading-6 text-slate-900">
                 <h3>{letter}</h3>
               </div>
               <ul role="list" className="divide-y divide-slate-100">
-                {dashboardMocks[letter].map((person) => (
-                  <li
-                    key={person.email}
-                    className="flex justify-between px-3 py-5  text-slate-900"
-                  >
-                    <div className="min-w-36">
-                      <p className="text-sm font-semibold leading-6">
-                        {person.name}
-                      </p>
-                    </div>
-                    <div>21,370</div>
-                    <div>0,2137</div>
-                    <div>2,1370</div>
-                  </li>
-                ))}
+                {directory > 0 &&
+                  Object.keys(directory).map((order) => (
+                    <li
+                      key={order.order_id.hex}
+                      className="flex justify-between px-3 py-5 text-slate-900"
+                    >
+                      <div className="min-w-36">
+                        <p className="text-sm font-semibold leading-6">
+                          {order.additionalInformation.equityTokenAmount.type}
+                          Name
+                        </p>
+                      </div>
+                      <div>{order.additionalInformation.pricePerToken.hex}</div>
+                      <div>
+                        {order.additionalInformation.equityTokenAmount.hex}
+                      </div>
+                      <div>
+                        {order.additionalInformation.totalOrderAmount.hex}
+                      </div>
+                      <div>{order.additionalInformation.currentState}</div>
+                    </li>
+                  ))}
               </ul>
             </div>
           ))}
