@@ -204,7 +204,7 @@ export default function Dashboard() {
     ],
   };
   return (
-    <div className="w-[600px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg bg-secondary">
+    <div className="w-[900px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg bg-secondary">
       <div className="flex justify-between text-accent text-xl p-4 pt-0 font-bold">
         <h3 className="min-w-36">Name</h3>
         <h3>Price</h3>
