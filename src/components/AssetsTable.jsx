@@ -6,7 +6,7 @@ function classNames(...classes) {
 
 export default function AssetsTable() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 w-3/4">
+    <div className="px-4 sm:px-6 lg:px-8 w-3/4 border-4 border-black mx-auto mt-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
