@@ -8,8 +8,12 @@ import Navbar from "./Navbar";
 export default function Layout() {
   const navigate = useNavigate();
 
-  const { buttonText, connectWalletHandler, metaMaskAccount } =
-    useMetaMaskContext();
+  const {
+    buttonText,
+    connectWalletHandler,
+    metaMaskAccount,
+    disconnectHandler,
+  } = useMetaMaskContext();
 
   useEffect(() => {
     if (metaMaskAccount) navigate("/assets-table");
@@ -22,6 +26,7 @@ export default function Layout() {
         metaMaskAccount={metaMaskAccount}
         buttonText={buttonText}
         connectWalletHandler={connectWalletHandler}
+        disconnectHandler={disconnectHandler}
       />
       <main className="w-full items-center flex-1">
         <Routes>

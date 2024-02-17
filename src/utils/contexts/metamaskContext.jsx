@@ -4,6 +4,7 @@ const MetaMaskContext = createContext({
   error: null,
   metaMaskAccount: null,
   connectWalletHandler: () => undefined,
+  disconnectHandler: () => undefined,
   buttonText: "Connect",
 });
 
@@ -15,6 +16,19 @@ export const MetamaskProvider = ({ children }) => {
   const [metaMaskAccount, setMetaMaskAccount] = useState(null);
   const [buttonText, setButtonText] = useState("Connect");
 
+  const disconnectHandler = (newAccount) => {
+    if (
+      Array.isArray(newAccount) &&
+      newAccount.length > 0 &&
+      typeof newAccount[0] === "string"
+    ) {
+      setButtonText("Connected");
+      setMetaMaskAccount(newAccount[0]);
+    } else {
+      setButtonText("Connect");
+      setMetaMaskAccount(null);
+    }
+  };
   useEffect(() => {
     const accountChangedHandler = (newAccount) => {
       if (typeof newAccount === "string") {
@@ -24,20 +38,6 @@ export const MetamaskProvider = ({ children }) => {
 
     const chainChangedHandler = () => {
       window.location.reload();
-    };
-
-    const disconnectHandler = (newAccount) => {
-      if (
-        Array.isArray(newAccount) &&
-        newAccount.length > 0 &&
-        typeof newAccount[0] === "string"
-      ) {
-        setButtonText("Connected");
-        setMetaMaskAccount(newAccount[0]);
-      } else {
-        setButtonText("Connect");
-        setMetaMaskAccount(null);
-      }
     };
 
     if (window.ethereum) {
@@ -59,7 +59,7 @@ export const MetamaskProvider = ({ children }) => {
         }
 
         setMetaMaskAccount(account[0]);
-        setButtonText("Connected");
+        setButtonText("Logout");
         setError("");
       } catch {
         setError("Cannot connect with Metamask");
@@ -76,6 +76,7 @@ export const MetamaskProvider = ({ children }) => {
         metaMaskAccount,
         buttonText,
         connectWalletHandler,
+        disconnectHandler,
       }}
     >
       {children}

@@ -4,10 +4,10 @@ export default function Navbar({
   metaMaskAccount,
   buttonText,
   connectWalletHandler,
+  disconnectHandler,
 }) {
-  console.log("metaMaskAccount:", metaMaskAccount);
   return (
-    <div className="flex flex-row bg-red-100 py-4 px-36 justify-between">
+    <div className="flex flex-row bg-red-100 py-4 justify-between max-w-[900px] mx-auto">
       <div className="flex justify-center items-center px-4 py-2 bg-primary border text-white">
         BULLetproof
       </div>
@@ -23,7 +23,7 @@ export default function Navbar({
         <button
           className=" bg-primary"
           disabled={buttonText === "Connected"}
-          onClick={connectWalletHandler}
+          onClick={metaMaskAccount ? disconnectHandler : connectWalletHandler}
         >
           <div className="w-20">{buttonText}</div>
         </button>
