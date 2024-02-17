@@ -1,11 +1,4 @@
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-];
+import { people } from "../utils/constants/mocked-assets";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
