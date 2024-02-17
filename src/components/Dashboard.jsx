@@ -1,6 +1,22 @@
+// import { useEffect, useState } from "react";
 import { dashboardMocks } from "../utils/constants/dashboard-mocks";
 
 export default function Dashboard() {
+  // const [directory, setDirectory] = useState({});
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("YOUR_API_ENDPOINT");
+  //       setDirectory(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   return (
     <div className="w-[900px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg bg-secondary">
       <div className="flex justify-between text-accent text-xl p-4 pt-0 font-bold">
