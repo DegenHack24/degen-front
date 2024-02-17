@@ -1,9 +1,11 @@
 // import { useEffect, useState } from "react";
 // import axios from "axios";
+import { useState } from "react";
 import { dashboardMocks } from "../utils/constants/dashboard-mocks";
 import Modal from "./Modal";
 
 export default function Dashboard() {
+  const [open, setOpen] = useState(false);
   // const [directory, setDirectory] = useState({});
 
   // useEffect(() => {
@@ -21,7 +23,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <Modal />
+      <Modal open={open} setOpen={setOpen} />
+      <button onClick={() => setOpen(true)}>OPEN MODAL</button>
       <div className="w-[900px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg bg-secondary">
         <div className="flex justify-between text-accent text-xl p-4 pt-0 font-bold">
           <h3 className="min-w-36">Name</h3>
