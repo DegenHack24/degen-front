@@ -5,11 +5,13 @@ import { MetamaskProvider } from "./utils/contexts/metamaskContext";
 
 function App() {
   return (
-    <MetamaskProvider>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </MetamaskProvider>
+    <div className="h-screen">
+      <MetamaskProvider>
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </MetamaskProvider>
+    </div>
   );
 }
 

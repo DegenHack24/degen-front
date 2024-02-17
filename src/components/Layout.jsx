@@ -17,12 +17,12 @@ export default function Layout() {
   }, [metaMaskAccount]);
 
   return (
-    <div className="w-full justify-center mx-auto">
+    <div className="w-full justify-center mx-auto h-screen bg-[#F3EBE0]">
       <Navbar
         buttonText={buttonText}
         connectWalletHandler={connectWalletHandler}
       />
-      <main className="w-full items-center flex-1 min-h-screen">
+      <main className="w-full items-center flex-1">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/assets-table" element={<AssetsTable />} />

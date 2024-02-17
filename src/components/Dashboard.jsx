@@ -204,7 +204,7 @@ export default function Dashboard() {
     ],
   };
   return (
-    <div className="w-[600px] mx-auto mb-20 mt-10 p-10 border rounded-xl">
+    <div className="w-[600px] mx-auto mt-10 p-10 border rounded-xl">
       <div className="flex flex-row gap-10 text-black">
         <h3>Name</h3>
         <h3>Price</h3>
