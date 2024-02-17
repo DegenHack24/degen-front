@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import "../src/styles/App.css";
 import Layout from "./components/Layout";
 import { MetamaskProvider } from "./utils/contexts/metamaskContext";
@@ -5,9 +6,9 @@ import { MetamaskProvider } from "./utils/contexts/metamaskContext";
 function App() {
   return (
     <MetamaskProvider>
-      <main className="w-full items-center flex-1 min-h-screen">
+      <BrowserRouter>
         <Layout />
-      </main>
+      </BrowserRouter>
     </MetamaskProvider>
   );
 }
