@@ -204,7 +204,7 @@ export default function Dashboard() {
     ],
   };
   return (
-    <div className="w-[600px] mx-auto mt-10 p-10 border-2 rounded-xl border-[#4545EF] shadow-lg">
+    <div className="w-[600px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg">
       <div className="flex justify-between text-black text-xl p-4 pt-0">
         <h3>Name</h3>
         <h3>Price</h3>
@@ -214,17 +214,17 @@ export default function Dashboard() {
       <nav className="h-[600px] overflow-y-auto" aria-label="Directory">
         {Object.keys(directory).map((letter) => (
           <div key={letter} className="relative">
-            <div className="sticky top-0 z-10 border-y border-b-gray-200 border-t-gray-100 bg-gray-50 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900">
+            <div className="sticky top-0 z-10 border-y border-b-slate-200 border-t-slate-100 bg-slate-50 px-3 py-1.5 text-sm font-semibold leading-6 text-slate-900">
               <h3>{letter}</h3>
             </div>
-            <ul role="list" className="divide-y divide-gray-100">
+            <ul role="list" className="divide-y divide-slate-100">
               {directory[letter].map((person) => (
                 <li
                   key={person.email}
                   className="flex justify-between px-3 py-5"
                 >
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                    <p className="text-sm font-semibold leading-6 text-slate-900">
                       {person.name}
                     </p>
                   </div>

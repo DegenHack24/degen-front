@@ -17,7 +17,7 @@ export default function Layout() {
   }, [metaMaskAccount]);
 
   return (
-    <div className="w-full justify-center mx-auto h-screen bg-[#F3EBE0]">
+    <div className="w-full justify-center mx-auto h-screen bg-background">
       <Navbar
         metaMaskAccount={metaMaskAccount}
         buttonText={buttonText}
