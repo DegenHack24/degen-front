@@ -97,7 +97,7 @@ export default function Dashboard() {
                           onClick={() => setOpen(true)}
                           className="bg-accent"
                         >
-                          Buy
+                          Fulfil order
                         </button>
                       </div>
                     </li>
