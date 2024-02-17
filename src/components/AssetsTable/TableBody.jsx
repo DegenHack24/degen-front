@@ -4,7 +4,6 @@ import { classNames } from "../../utils/helpers/classNames";
 const TABLE_HEADINGS = ["Name", "Amount", ""];
 
 export default function TableBody({ data, view }) {
-  console.log("data:", data);
   return (
     <div className="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
       <div className="mt-8 flow-root">

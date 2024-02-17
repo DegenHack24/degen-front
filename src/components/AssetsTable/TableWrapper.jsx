@@ -6,7 +6,6 @@ import { myShares, allOrders } from "../../utils/constants/mocked-assets";
 
 export default function AssetsTable() {
   const [view, setView] = useState(MY_ASSETS);
-  console.log("view:", view);
 
   const handleView = (view) => {
     setView(view);
