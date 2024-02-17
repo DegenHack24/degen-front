@@ -19,6 +19,7 @@ export default function Layout() {
   return (
     <div className="w-full justify-center mx-auto h-screen bg-[#F3EBE0]">
       <Navbar
+        metaMaskAccount={metaMaskAccount}
         buttonText={buttonText}
         connectWalletHandler={connectWalletHandler}
       />
