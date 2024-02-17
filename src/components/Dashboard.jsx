@@ -1,15 +1,18 @@
+import { useMetaMaskContext } from "../utils/contexts/metamaskContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { dashboardMocks } from "../utils/constants/dashboard-mocks";
 import Modal from "./Modal";
+import { classNames } from "../utils/helpers/classNames";
+import { BigNumber } from "ethers";
+import { timestampToDate } from "../utils/helpers/timestampToDate";
 
 export default function Dashboard() {
-  const [directory, setDirectory] = useState({});
+  const [orders, setOrders] = useState({});
   const [open, setOpen] = useState(false);
-  console.log(directory);
+  const { metaMaskAccount } = useMetaMaskContext();
+
   useEffect(() => {
-    const fetchData = async () => {
-      console.log("dupa");
+    const fetchOrders = async () => {
       try {
         const response = await axios.post(
           "http://localhost:8080/v1/getAllOffers",
@@ -26,58 +29,82 @@ export default function Dashboard() {
             },
           }
         );
-        setDirectory(response.data.body);
+        setOrders(response.data.body);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData();
+    fetchOrders();
   }, []);
 
   return (
     <>
       <Modal open={open} setOpen={setOpen} />
-      <button onClick={() => setOpen(true)}>OPEN MODAL</button>
-      <div className="w-[900px] mx-auto mt-10 p-10 border-2 rounded-xl border-accent shadow-lg bg-secondary">
-        <div className="flex justify-between text-accent text-xl p-4 pt-0 font-bold">
-          <h3 className="min-w-36">Name</h3>
-          <h3>Price</h3>
-          <h3>Quantity</h3>
+      {!metaMaskAccount && (
+        <div className="w-[900px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4">
+          <h2>To buy shares you need to be logged in</h2>
+        </div>
+      )}
+      <h1 className="w-full text-center text-3xl">Active Buy Orders</h1>
+      <div className="w-[900px] mx-auto mt-2 py-3 px-4 border-2 rounded-xl border-accent shadow-lg bg-secondary">
+        <div className="w-full flex justify-between text-accent text-xl p-4 pt-0 font-bold">
+          <h3>Name</h3>
+          <h3>Unit price</h3>
           <h3>Total</h3>
           <h3>Date</h3>
+          <h3 className="w-[90px]"></h3>
         </div>
-        <nav className="h-[600px] overflow-y-auto" aria-label="Directory">
-          {/* {Object.keys(directory).length > 0 &&
-            Object.keys(directory).map((letter) => (
-              <div key={letter} className="relative">
-                {console.log(letter, "letter")}
-                <div className="sticky top-0 z-10 border-y border-b-slate-200 border-t-slate-100 bg-slate-50 px-3 py-1.5 text-sm font-semibold leading-6 text-slate-900">
-                  <h3>{letter}</h3>
-                </div> */}
-          <ul role="list" className="divide-y divide-slate-100">
-            {directory > 0 &&
-              Object.keys(directory).map((order) => (
-                <li
-                  key={order.order_id.hex}
-                  className="flex justify-between px-3 py-5 text-slate-900"
-                >
-                  <div className="min-w-36">
-                    <p className="text-sm font-semibold leading-6">
-                      {order.additionalInformation.equityTokenAmount.type}
-                      Name
-                    </p>
+        <div className="max-h-[600px] overflow-y-auto" aria-label="Directory">
+          <ul
+            role="list"
+            className="flex flex-col divide-y divide-slate-100 border"
+          >
+            {orders.length > 0 &&
+              orders
+                .filter((order) => order.status === "NEW")
+                .map((order, index) => (
+                  <div key={order.order_id.hex} className="relative">
+                    {console.log(order, "order")}
+                    <li
+                      key={order.order_id.hex}
+                      className={classNames(
+                        index % 2 === 0 ? "bg-slate-50" : "bg-secondary",
+                        "flex justify-between px-3 py-5 text-slate-900 "
+                      )}
+                    >
+                      <div className="min-w-[15%]">
+                        <p className="text-sm font-semibold leading-6">
+                          {order.additionalInformation.equityTokenName}
+                        </p>
+                      </div>
+                      <div className="min-w-[10%]">
+                        {BigNumber.from(
+                          order.additionalInformation.pricePerToken.hex
+                        ).toString()}
+                      </div>
+                      <div className="min-w-[10%] text-center">
+                        {BigNumber.from(
+                          order.additionalInformation.totalOrderAmount.hex
+                        ).toString()}
+                      </div>
+                      <div className="min-w-[10%] text-center">
+                        {timestampToDate(order.additionalInformation.timestamp)}
+                      </div>
+
+                      <div className="ml-10 text-white">
+                        <button
+                          onClick={() => setOpen(true)}
+                          className="bg-accent"
+                        >
+                          Buy
+                        </button>
+                      </div>
+                    </li>
                   </div>
-                  <div>{order.additionalInformation.pricePerToken.hex}</div>
-                  <div>{order.additionalInformation.equityTokenAmount.hex}</div>
-                  <div>{order.additionalInformation.totalOrderAmount.hex}</div>
-                  <div>{order.additionalInformation.currentState}</div>
-                </li>
-              ))}
+                ))}
           </ul>
-          {/* </div>
-            ))} */}
-        </nav>
+        </div>
       </div>
     </>
   );

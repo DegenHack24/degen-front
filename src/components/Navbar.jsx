@@ -15,7 +15,10 @@ export default function Navbar({
         {metaMaskAccount && (
           <div className="text-black">
             <p>
-              Hello! <span>{shortenAddress(metaMaskAccount)}</span>
+              Hello!{" "}
+              <span className="font-semibold">
+                {shortenAddress(metaMaskAccount)}
+              </span>
             </p>
           </div>
         )}
