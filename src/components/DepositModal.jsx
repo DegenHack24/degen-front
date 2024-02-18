@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { ethers } from "ethers";
 import ABI from "../contracts/TOK.sol/TOK.json";
 
-export default function Modal({
+export default function DepositModal({
   open,
   setOpen,
   orderQuantity,
@@ -31,6 +31,9 @@ export default function Modal({
       { gasLimit: 300000 }
     );
     console.log("depositRes:", depositRes);
+
+    const finalRes = await depositRes.wait();
+    console.log("finalRes:", finalRes);
 
     console.log("WYSYŁANY OBIEKT", {
       transactionToken,

@@ -1,7 +1,7 @@
 import { useMetaMaskContext } from "../utils/contexts/metamaskContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Modal from "./Modal";
+import DepositModal from "./DepositModal";
 import { classNames } from "../utils/helpers/classNames";
 import { timestampToDate } from "../utils/helpers/timestampToDate";
 import { convertBigNumber } from "../utils/helpers/convertBigNumber";
@@ -57,14 +57,16 @@ export default function Dashboard() {
 
   return (
     <>
-      <Modal
+      <DepositModal
         open={open}
         setOpen={setOpen}
         orderQuantity={convertBigNumber(
           selectedOrder?.additionalInformation?.totalOrderAmount
         )}
         orderName={selectedOrder?.additionalInformation?.equityTokenName}
-        transactionToken={selectedOrder?.additionalInformation?.tokenAddress}
+        transactionToken={
+          selectedOrder?.additionalInformation?.equityTokenOwner
+        }
         orderId={convertBigNumber(selectedOrder?.order_id)}
         signer={signer}
       />
@@ -90,6 +92,11 @@ export default function Dashboard() {
             {orders.length > 0 &&
               orders
                 .filter((order) => order.status === "NEW")
+                .sort(
+                  (a, b) =>
+                    b.additionalInformation.timestamp -
+                    a.additionalInformation.timestamp
+                )
                 .map((order, index) => (
                   <div key={order.order_id.hex} className="relative">
                     <li
@@ -104,12 +111,13 @@ export default function Dashboard() {
                           {order.additionalInformation.equityTokenName}
                         </p>
                       </div>
-                      <div className="min-w-[10%] ml-4">
+                      <div className="min-w-[10%]">
                         {convertBigNumber(
                           order.additionalInformation.pricePerToken.hex
-                        )}
+                        )}{" "}
+                        PLN
                       </div>
-                      <div className="min-w-[5%] ml-10 text-center">
+                      <div className="min-w-[5%] ml-14 text-center">
                         {convertBigNumber(
                           order.additionalInformation.totalOrderAmount.hex
                         )}

@@ -35,7 +35,7 @@ export default function Navbar({
           }
         >
           <div className="w-34">
-            {location.pathname === "/" ? "Create buy order" : "Homepage"}
+            {location.pathname === "/" ? "Create order" : "Homepage"}
           </div>
         </button>
         <button
