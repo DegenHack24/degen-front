@@ -69,7 +69,7 @@ export default function Dashboard() {
         signer={signer}
       />
       {!metaMaskAccount && (
-        <div className="w-[900px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4">
+        <div className="w-[400px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4">
           <h2>To buy shares you need to be logged in</h2>
         </div>
       )}
@@ -96,32 +96,37 @@ export default function Dashboard() {
                       key={order.order_id.hex}
                       className={classNames(
                         index % 2 === 0 ? "bg-slate-50" : "bg-secondary",
-                        "flex justify-between px-3 py-5 text-slate-900 "
+                        "flex justify-between items-center px-3 py-5 text-slate-900 "
                       )}
                     >
-                      <div className="min-w-[15%]">
+                      <div className="min-w-[17.5%]">
                         <p className="text-sm font-semibold leading-6">
                           {order.additionalInformation.equityTokenName}
                         </p>
                       </div>
-                      <div className="min-w-[10%]">
+                      <div className="min-w-[10%] ml-4">
                         {convertBigNumber(
                           order.additionalInformation.pricePerToken.hex
                         )}
                       </div>
-                      <div className="min-w-[10%] text-center">
+                      <div className="min-w-[5%] ml-10 text-center">
                         {convertBigNumber(
                           order.additionalInformation.totalOrderAmount.hex
                         )}
                       </div>
-                      <div className="min-w-[10%] text-center">
+                      <div className="min-w-[10%] ml-12 text-center">
                         {timestampToDate(order.additionalInformation.timestamp)}
                       </div>
 
                       <div className="ml-10 text-white">
                         <button
                           onClick={() => handleOpenModal(order)}
-                          className="bg-accent"
+                          className={classNames(
+                            metaMaskAccount
+                              ? "bg-accent"
+                              : "bg-slate-200 hover:border-none hover:outline-none pointer-events-none"
+                          )}
+                          disabled={!metaMaskAccount}
                         >
                           Fulfill
                         </button>

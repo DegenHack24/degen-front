@@ -27,7 +27,8 @@ export default function Modal({
 
     const depositRes = await contract.depositEquityToken(
       orderId,
-      orderQuantity
+      orderQuantity,
+      { gasLimit: 300000 }
     );
     console.log("depositRes:", depositRes);
 
