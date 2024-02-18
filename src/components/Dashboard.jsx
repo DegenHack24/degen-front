@@ -6,6 +6,7 @@ import { classNames } from "../utils/helpers/classNames";
 import { timestampToDate } from "../utils/helpers/timestampToDate";
 import { convertBigNumber } from "../utils/helpers/convertBigNumber";
 import { ethers } from "ethers";
+import SpinnerLoader from "./SpinnerLoader";
 
 export default function Dashboard() {
   const [orders, setOrders] = useState({});
@@ -55,6 +56,12 @@ export default function Dashboard() {
     });
   }, []);
 
+  if (!orders.length)
+    return (
+      <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <SpinnerLoader />;
+      </div>
+    );
   return (
     <>
       <DepositModal
