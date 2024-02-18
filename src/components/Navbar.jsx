@@ -12,8 +12,8 @@ export default function Navbar({
 
   return (
     <div className="flex flex-row bg-red-100 py-4 justify-between max-w-[900px] mx-auto">
-      <div className="flex justify-center items-center px-4 py-2 bg-primary border text-white">
-        BULLetproof
+      <div className="">
+        <img className="h-24" src={`/logo.webp`} alt="Logo" />
       </div>
       <div className="flex justify-center items-center gap-4">
         {metaMaskAccount && (

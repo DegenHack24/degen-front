@@ -4,7 +4,6 @@ const colorsPalette = {
   primary: "#C33642",
   secondary: "#EBF1FF",
   accent: "#4545EF",
-  background: "#F3EBE0",
   slate: {
     50: "#F3F5F7",
     100: "#E3E9EF",

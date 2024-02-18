@@ -1,5 +1,6 @@
 #root {
   width: 100%;
+  background-image: linear-gradient(to bottom right, #fff5f5, #ffffff);
 }
 
 /* Disable input arrows for Chrome, Safari, etc. */
