@@ -7,7 +7,7 @@ export default function RangePicker({ value, type, onChange, max }) {
       id="range"
       type={type}
       onChange={onChange}
-      min={0}
+      min={1}
       max={max}
     />
   );
