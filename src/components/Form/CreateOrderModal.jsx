@@ -2,8 +2,14 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import SpinnerLoader from "../SpinnerLoader";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { shortenAddress } from "../../utils/helpers/shortenAddress";
 
-export default function CreateOrderModal({ show, setOpen, loadingState }) {
+export default function CreateOrderModal({
+  show,
+  setOpen,
+  loadingState,
+  transactionHash,
+}) {
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog as="div" className="relative z-30" onClose={() => setOpen(false)}>
@@ -45,7 +51,21 @@ export default function CreateOrderModal({ show, setOpen, loadingState }) {
                       "Please confirm transaction on your metamask wallet"}
                     {loadingState === "first-response" &&
                       "Please wait for the blockchain confirmation"}
-                    {loadingState === "success" && "Success!"}
+                    {loadingState === "success" && (
+                      <div>
+                        <h2>Success!</h2>
+                        <div className="flex justify-center items-center gap-4 whitespace-nowrap">
+                          <p className="text-[22px] mt-2">Etherscan link: </p>
+
+                          <a
+                            className="mt-1"
+                            href={`https://sepolia.etherscan.io/tx/${transactionHash}`}
+                          >
+                            <span>{shortenAddress(transactionHash)}</span>
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </h1>
 
                   <button

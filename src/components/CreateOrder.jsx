@@ -18,6 +18,7 @@ export default function CreateOrder() {
   const [signer, setSigner] = useState();
   const [loadingState, setLoadingState] = useState("idle");
   const [createOrderModalOpen, setCreateOrderModalOpen] = useState(false);
+  const [transactionHash, setTransactionHash] = useState("");
   const { metaMaskAccount } = useMetaMaskContext();
 
   console.log("createOrderModalOpen:", createOrderModalOpen);
@@ -56,7 +57,11 @@ export default function CreateOrder() {
     console.log("createOrderRes:", createOrderRes);
 
     const finalRes = await createOrderRes.wait();
-    if (finalRes) setLoadingState("success");
+    console.log("finalRes:", finalRes.transactionHash);
+    if (finalRes) {
+      setTransactionHash(finalRes.transactionHash);
+      setLoadingState("success");
+    }
   };
 
   useEffect(() => {
@@ -88,6 +93,7 @@ export default function CreateOrder() {
           show={createOrderModalOpen}
           setOpen={setCreateOrderModalOpen}
           loadingState={loadingState}
+          transactionHash={transactionHash}
         />
       )}
 
