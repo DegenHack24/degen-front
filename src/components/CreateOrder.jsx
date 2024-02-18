@@ -21,13 +21,6 @@ export default function CreateOrder() {
   const [transactionHash, setTransactionHash] = useState("");
   const { metaMaskAccount } = useMetaMaskContext();
 
-  console.log("createOrderModalOpen:", createOrderModalOpen);
-  console.log("loadingState:", loadingState);
-  //   console.log("selectedQuantity:", selectedQuantity);
-  //   console.log("selectedPrice:", selectedPrice);
-  //   console.log("selectedAddress:", selectedAddress);
-  //   console.log("tokens:", tokens);
-
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
   useEffect(() => {
     provider.send("eth_requestAccounts", []).then(() => {
@@ -54,10 +47,7 @@ export default function CreateOrder() {
     );
 
     if (createOrderRes) setLoadingState("first-response");
-    console.log("createOrderRes:", createOrderRes);
-
     const finalRes = await createOrderRes.wait();
-    console.log("finalRes:", finalRes.transactionHash);
     if (finalRes) {
       setTransactionHash(finalRes.transactionHash);
       setLoadingState("success");

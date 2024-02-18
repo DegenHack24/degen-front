@@ -11,7 +11,6 @@ import SpinnerLoader from "./SpinnerLoader";
 export default function Dashboard() {
   const [orders, setOrders] = useState({});
   const [selectedOrder, setSelectedOrder] = useState({});
-  console.log("selectedOrder:", selectedOrder);
   const [open, setOpen] = useState(false);
   const [signer, setSigner] = useState();
   const { metaMaskAccount } = useMetaMaskContext();
