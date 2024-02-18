@@ -12,7 +12,7 @@ export default function Navbar({
 
   return (
     <div className="flex flex-row bg-red-100 py-4 justify-between max-w-[900px] mx-auto">
-      <div className="">
+      <div>
         <img className="h-24" src={`/logo.webp`} alt="Logo" />
       </div>
       <div className="flex justify-center items-center gap-4">
@@ -28,7 +28,7 @@ export default function Navbar({
         )}
 
         <button
-          className=" bg-primary"
+          className="bg-primary shadow-xl"
           disabled={buttonText === "Connected"}
           onClick={() =>
             navigate(location.pathname === "/" ? "/create-order" : "/")
@@ -39,7 +39,7 @@ export default function Navbar({
           </div>
         </button>
         <button
-          className=" bg-primary"
+          className="bg-primary shadow-xl"
           disabled={buttonText === "Connected"}
           onClick={metaMaskAccount ? disconnectHandler : connectWalletHandler}
         >

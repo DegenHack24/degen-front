@@ -78,7 +78,7 @@ export default function Dashboard() {
         signer={signer}
       />
       {!metaMaskAccount && (
-        <div className="w-[400px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4">
+        <div className="w-[400px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4 shadow-xl">
           <h2>To buy shares you need to be logged in</h2>
         </div>
       )}
