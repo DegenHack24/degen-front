@@ -3,13 +3,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Modal from "./Modal";
 import { classNames } from "../utils/helpers/classNames";
-import { BigNumber } from "ethers";
 import { timestampToDate } from "../utils/helpers/timestampToDate";
+import { convertBigNumber } from "../utils/helpers/convertBigNumber";
+import { ethers } from "ethers";
 
 export default function Dashboard() {
   const [orders, setOrders] = useState({});
+  const [selectedOrder, setSelectedOrder] = useState({});
+  console.log("selectedOrder:", selectedOrder);
   const [open, setOpen] = useState(false);
+  const [signer, setSigner] = useState();
   const { metaMaskAccount } = useMetaMaskContext();
+
+  const handleOpenModal = (order) => {
+    setSelectedOrder(order);
+    setOpen(true);
+  };
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -38,9 +47,27 @@ export default function Dashboard() {
     fetchOrders();
   }, []);
 
+  useEffect(() => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    provider.send("eth_requestAccounts", []).then(() => {
+      const signer = provider.getSigner();
+      setSigner(signer);
+    });
+  }, []);
+
   return (
     <>
-      <Modal open={open} setOpen={setOpen} />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        orderQuantity={convertBigNumber(
+          selectedOrder?.additionalInformation?.totalOrderAmount
+        )}
+        orderName={selectedOrder?.additionalInformation?.equityTokenName}
+        transactionToken={selectedOrder?.additionalInformation?.tokenAddress}
+        orderId={convertBigNumber(selectedOrder?.order_id)}
+        signer={signer}
+      />
       {!metaMaskAccount && (
         <div className="w-[900px] border border-primary border-2 font-semibold rounded-xl text-black mx-auto px-2 py-4 text-center bg-secondary mb-4">
           <h2>To buy shares you need to be logged in</h2>
@@ -65,7 +92,6 @@ export default function Dashboard() {
                 .filter((order) => order.status === "NEW")
                 .map((order, index) => (
                   <div key={order.order_id.hex} className="relative">
-                    {console.log(order, "order")}
                     <li
                       key={order.order_id.hex}
                       className={classNames(
@@ -79,14 +105,14 @@ export default function Dashboard() {
                         </p>
                       </div>
                       <div className="min-w-[10%]">
-                        {BigNumber.from(
+                        {convertBigNumber(
                           order.additionalInformation.pricePerToken.hex
-                        ).toString()}
+                        )}
                       </div>
                       <div className="min-w-[10%] text-center">
-                        {BigNumber.from(
+                        {convertBigNumber(
                           order.additionalInformation.totalOrderAmount.hex
-                        ).toString()}
+                        )}
                       </div>
                       <div className="min-w-[10%] text-center">
                         {timestampToDate(order.additionalInformation.timestamp)}
@@ -94,10 +120,10 @@ export default function Dashboard() {
 
                       <div className="ml-10 text-white">
                         <button
-                          onClick={() => setOpen(true)}
+                          onClick={() => handleOpenModal(order)}
                           className="bg-accent"
                         >
-                          Buy
+                          Fulfill
                         </button>
                       </div>
                     </li>
